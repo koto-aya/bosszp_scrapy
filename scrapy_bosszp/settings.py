@@ -61,7 +61,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   "scrapy_bosszp.middlewares.ScrapyBosszpDownloaderMiddleware": 543,
+    #"scrapy_bosszp.middlewares.ScrapyBosszpDownloaderMiddleware": 300,
+    "scrapy_bosszp.middlewares.seleniumDownloaderMiddleware":1
 }
 
 # Enable or disable extensions

@@ -12,12 +12,15 @@ class BosszpSpider(scrapy.Spider):
 
     #是执行力start_urls后，执行的方法，response就是返回的对象
     def parse(self, response):
-        browser=webdriver.Edge()
-        browser.get(self.start_urls[0])
-        browser.implicitly_wait(2)
-        job_card=browser.find_element(By.CLASS_NAME,"job-card-wrapper")
-        job_name=job_card.find_element(By.CLASS_NAME,"job-name").text
-        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        print(job_name)
-        # with open("test.html","w+",encoding="utf-8") as file:
-        #     file.write(content)
+        job_list=response.xpath("//li[@class='job-card-wrapper']")
+        file = open('data.txt',"w+",encoding="utf-8")
+        for job_item in job_list:
+            job_name=job_item.xpath(".//span[@class='job-name']/text()").get()
+            job_area=job_item.xpath(".//span[@class='job-area']/text()").get()
+            company_name=job_item.xpath(".//h3[@class='company-name']/a/text()").get()
+            file.write(f"职位名称{job_name}\n")
+            file.write(f"工作地点{job_area}\n")
+            file.write(f"招聘企业{company_name}\n")
+            file.write("-----------------------------------\n")
+
+        file.close()

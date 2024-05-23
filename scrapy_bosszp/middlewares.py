@@ -2,12 +2,38 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+import time
 
 from scrapy import signals
+from selenium import webdriver
+from scrapy.http.response.html import HtmlResponse
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
+from selenium.webdriver.common.by import By
 
+
+class seleniumDownloaderMiddleware(object):
+    def __init__(self):
+        option=webdriver.EdgeOptions()
+        user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36'
+        option.add_argument(f'user-agent={user_agent}')
+        option.add_argument('--headless')
+        self.driver = webdriver.Edge(options=option)
+
+
+
+    def process_request(self, request, spider):
+        self.driver.get(request.url)
+        time.sleep(5)
+        html=self.driver.page_source
+        response=HtmlResponse(
+            url=self.driver.current_url,
+            body=html,
+            request=request,
+            encoding='utf-8'
+        )
+        return response
 
 class ScrapyBosszpSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
