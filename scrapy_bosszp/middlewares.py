@@ -21,8 +21,6 @@ class seleniumDownloaderMiddleware(object):
         option.add_argument('--headless')
         self.driver = webdriver.Edge(options=option)
 
-
-
     def process_request(self, request, spider):
         self.driver.get(request.url)
         time.sleep(5)

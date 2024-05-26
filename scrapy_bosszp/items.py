@@ -6,7 +6,13 @@
 import scrapy
 
 
-class ScrapyBosszpItem(scrapy.Item):
+class BosszpItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    job_name=scrapy.Field()
+    job_area=scrapy.Field()
+    company_name=scrapy.Field()
+    salary=scrapy.Field()
+    work_experience=scrapy.Field()
+    educational_background=scrapy.Field()
+
