@@ -1,6 +1,4 @@
 import scrapy
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 
 from scrapy_bosszp.items import BosszpItem
 

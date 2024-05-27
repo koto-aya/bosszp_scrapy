@@ -5,12 +5,11 @@
 import time
 
 from scrapy import signals
-from selenium import webdriver
 from scrapy.http.response.html import HtmlResponse
+from selenium import webdriver
+
 
 # useful for handling different item types with a single interface
-from itemadapter import is_item, ItemAdapter
-from selenium.webdriver.common.by import By
 
 
 class seleniumDownloaderMiddleware(object):
